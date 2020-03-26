@@ -129,14 +129,13 @@ weekday <- weekdays(as.Date(imputed_d[,2])) %in% c('Monday','Tuesday','Wednesday
 imputed_d$daytype <- factor(weekday, labels=c('Weekend','Weekday')) 
 
 interval_steps_daytype <- data.frame(summarize(group_by(imputed_d, interval, daytype), steps=mean(steps, na.rm=T)))
-#interval_steps_weekend <- data.frame(summarize(group_by(d[!weekdays,], interval), weekend_steps=mean(steps, na.rm=T)))
 ```
 
 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). The plot should look something like the following, which was created using simulated data:
 
 
 ```r
-ggplot(data=imputed_d, aes(x=interval, y=steps)) + geom_path() + facet_grid(daytype ~ .)
+ggplot(data=interval_steps_daytype, aes(x=interval, y=steps)) + geom_path() + facet_grid(daytype ~ .)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
